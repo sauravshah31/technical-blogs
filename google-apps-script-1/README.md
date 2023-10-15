@@ -215,7 +215,7 @@ If you open the test deployment URL, each time you refresh the browser, you shou
 ### Refactoring code into html, css, js and gs files
 Now that we know the basics of how google app script works, we can start coding our application. But, let's see how to [structure](https://developers.google.com/apps-script/guides/html/best-practices) our code first. As you might have seen, you can only add a "Script" or "HTML" file in your script. However, you can put your html, css and js into multiple HTML files and then render it as a single file to the user. You can also have multiple gs files.
 Let's see how you can refactor your frontend html, css and js. You create a template html, call the server-side function to "include" other files and render that html template to get the entire page.
-You can refer to [this for the complete source code(https://github.com/sauravshah31/technical-blogs/tree/f96608505219de29cbdb080f0b559756f89d396e/google-apps-script-1/src) and have a look at [this for the final web app](https://script.google.com/macros/s/AKfycbzKyjNM5Elde7s_nTBPm90r8B-EeOim3rCD_GIggv1n275xOmT-JWEj2JsliB3uwbVC/exec) for the complete source code. `index.html` is a template HTML that "includes" other html files.
+You can refer to [this for the complete source code](https://github.com/sauravshah31/technical-blogs/tree/3ab9e68980ae95df975d8d474594716dba242da3/google-apps-script-1/src) and have a look at [this for the final web app](https://script.google.com/macros/s/AKfycbzKyjNM5Elde7s_nTBPm90r8B-EeOim3rCD_GIggv1n275xOmT-JWEj2JsliB3uwbVC/exec) for the complete source code. `index.html` is a template HTML that "includes" other html files.
 ```html
 <!DOCTYPE html>
 <html>
