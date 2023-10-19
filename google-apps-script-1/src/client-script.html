@@ -1,0 +1,31 @@
+<script>
+    const toggleTextTruncate = (evt) => {
+      let ele = evt.currentTarget;
+      let spans = ele.querySelectorAll('span');
+      let textEle = spans[0];
+      let iconEle = spans[1].querySelector('i');
+      if(ele.className.indexOf("text-truncate") == -1)
+      {
+        iconEle.classList.remove("bi-chevron-up");
+        iconEle.classList.add("bi-chevron-down");
+        textEle.classList.add("text-truncate");
+        ele.classList.add("text-truncate");
+      }
+      else
+      {
+        iconEle.classList.remove("bi-chevron-down");
+        iconEle.classList.add("bi-chevron-up");
+        textEle.classList.remove("text-truncate");
+        ele.classList.remove("text-truncate");
+      }
+    }
+    const initEventListeners = () => {
+      let taskNodes = document.getElementsByClassName('task-item');
+      for(let element of taskNodes){
+        console.log(element);
+        element.addEventListener('click', toggleTextTruncate);
+      }
+    }
+  
+    window.onload = initEventListeners;
+  </script>
