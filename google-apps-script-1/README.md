@@ -2,7 +2,7 @@
 
 > I have added links to the terms I've mentioned in this blog. There's no need to hastily click on each link as you read along (I understand how overwhelming that can be). Instead, I suggest you navigate through the entire tutorial first without clicking any links. You can revisit the links at your leisure to delve deeper into the topics.
 
-> [Use this link](https://script.google.com/macros/s/AKfycbwhSQySSkOVk5Mv4N9_y-MFF1DVOY_uU3mRWpkIx4mI-5iyQsNpp9tAY8P5Q_RGnmW5/exec) to view the final todo app we will be building. If you want to deploy "CoolTodoApp" on your own account and use it personally, [use this link](https://script.google.com/macros/s/AKfycbzSsEGHd56mxZv-1TnJ1abSW4bqlD1OI7ciFYL6L8bYsCX1SBUgosvSzXXss1xBIY3cEw/exec). You will be asked for some permissions, review and approve it by [following this](https://developers.google.com/static/apps-script/images/unverified-app-ui.gif). [This](https://github.com/sauravshah31/technical-blogs/google-apps-script-1/src) is the final source code.
+> [Use this link](https://script.google.com/macros/s/AKfycbwhSQySSkOVk5Mv4N9_y-MFF1DVOY_uU3mRWpkIx4mI-5iyQsNpp9tAY8P5Q_RGnmW5/exec) to view the final todo app we will be building. If you want to deploy "CoolTodoApp" on your own account and use it personally, [use this link](https://script.google.com/macros/s/AKfycbzSsEGHd56mxZv-1TnJ1abSW4bqlD1OI7ciFYL6L8bYsCX1SBUgosvSzXXss1xBIY3cEw/exec). You will be asked for some permissions, review and approve it by [following this](https://developers.google.com/static/apps-script/images/unverified-app-ui.gif). [This](https://github.com/sauravshah31/technical-blogs/tree/main/google-apps-script-1/src) is the final source code.
 
 
 ## Topics covered
@@ -1047,7 +1047,7 @@ We are done with coding the "CoolTodoApp". We have been using "Test Deployment" 
 
 ![Final Deployment](./.notes/final-deployment.png)
 
-Open the deployed link and start sharing it with your friends. They can deploy an instance of this app in their own Google account and start tracking the tasks. [Here](https://github.com/sauravshah31/technical-blogs/google-apps-script-1/src) is the final source code and [this](https://script.google.com/macros/s/AKfycbzSsEGHd56mxZv-1TnJ1abSW4bqlD1OI7ciFYL6L8bYsCX1SBUgosvSzXXss1xBIY3cEw/exec) is the todo app we have built.
+Open the deployed link and start sharing it with your friends. They can deploy an instance of this app in their own Google account and start tracking the tasks. [Here](https://github.com/sauravshah31/technical-blogs/tree/main/google-apps-script-1/src) is the final source code and [this](https://script.google.com/macros/s/AKfycbzSsEGHd56mxZv-1TnJ1abSW4bqlD1OI7ciFYL6L8bYsCX1SBUgosvSzXXss1xBIY3cEw/exec) is the todo app we have built.
 
 ![CoolTodoApp](./.notes/CoolTodoApp.png)
 
