@@ -31,7 +31,7 @@ Google Apps Script is a development platform provided by Google that can be used
 
 
 ## Getting started with google apps script
-Let's get started. Go to [script.new](script.new) to create a new Google app script. Let's give the project a name `CoolTodoApp`.
+Let's get started. Go to [script.new](https://script.new) to create a new Google app script. Let's give the project a name `CoolTodoApp`.
 ![New Project](./.notes/new-project.png)
 Google App script allows two kinds of files
 1. Script file: This is the .gs file (eg: code.gs) that contains server-side logic
@@ -164,7 +164,7 @@ google.script.run.withSuccessHandler(printSum).getSum(a,b);
 </script>
 ```
 
-Note that the functions starting with `underscore`(_) are not exposed to the client. If you want to write a "private" function that can't be called directly by the client, you can prepend the function name with "_". For example, the following `_getFileDataFromDrive` can't be called by the user directly. However, the client can call the `getData` function which will then call the `_getFileDataFromDrive`. This is a common pattern for internal utility functions and exposing them through an interface.
+Note that the functions starting with `underscore`('\_') are not exposed to the client. If you want to write a "private" function that can't be called directly by the client, you can prepend the function name with "\_". For example, the following `_getFileDataFromDrive` can't be called by the user directly. However, the client can call the `getData` function which will then call the `_getFileDataFromDrive`. This is a common pattern for internal utility functions and exposing them through an interface.
 ```js
 const APP_ROOT_FOLDER = "CoolTodoApp";
 
@@ -445,9 +445,9 @@ const doGet = (e) =>
 }
 ```
 
-`_searchFile` will check if a file exists in a folder and return the ID of the file using [`File.getId`](https://developers.google.com/apps-script/reference/drive/file#getid). The `doGet` function then gets the file by id using [`DriveApp.getFileById`](https://developers.google.com/apps-script/reference/drive/drive-app#getfilebyidid) and gets the download link using [`File.getDownloadUrl`](https://developers.google.com/apps-script/reference/drive/file#getdownloadurl). Note how I have prepended the `_searchFile` function with an underscore (_) to prevent exposing it to the client. 
+`_searchFile` will check if a file exists in a folder and return the ID of the file using [`File.getId`](https://developers.google.com/apps-script/reference/drive/file#getid). The `doGet` function then gets the file by id using [`DriveApp.getFileById`](https://developers.google.com/apps-script/reference/drive/drive-app#getfilebyidid) and gets the download link using [`File.getDownloadUrl`](https://developers.google.com/apps-script/reference/drive/file#getdownloadurl). Note how I have prepended the `_searchFile` function with an underscore (\_) to prevent exposing it to the client. 
 
-The return value of `doGet` function is a [HtmlOutput](https://developers.google.com/apps-script/reference/html/html-output) with a script that redirects the user to the download link. As we can't return [File](https://developers.google.com/apps-script/reference/drive/file) or [Blob](https://developers.google.com/apps-script/reference/base/blob.html) directly, I a redirecting the user to the download endpoint. You can also display the download URL instead of redirecting.
+The return value of `doGet` function is a [HtmlOutput](https://developers.google.com/apps-script/reference/html/html-output) with a script that redirects the user to the download link. As we can't return [File](https://developers.google.com/apps-script/reference/drive/file) or [Blob](https://developers.google.com/apps-script/reference/base/blob.html) directly, I am redirecting the user to the download endpoint. You can also display the download URL instead of redirecting.
 
 ![Drive service example: Download file](./.notes/drive-service-download-output.png)
 
@@ -690,9 +690,9 @@ If you run the `_generateReport` function, the chart created will be stored in t
 
 ![Chart Service: Pie Chart](./.notes/task-chart.png)
 
-First, you create a data source for the pie chart. [`Charts.newDataTable`](https://developers.google.com/apps-script/reference/charts/charts#newdatatable) creates an empty [DataTableBuilder](https://developers.google.com/apps-script/reference/charts/data-table-builder). Using [`addColumn`](https://developers.google.com/apps-script/reference/charts/data-table-builder#addcolumntype,-label) you can add a column [of a type](https://developers.google.com/apps-script/reference/charts/column-type) and give it a label. Then, using `addRow`(https://developers.google.com/apps-script/reference/charts/data-table-builder#addrowvalues) you can add rows to the data table. As we have added two columns in the data table, the rows are also two columns. You can chain multiple operations in a single statement like I have done with `.addColumn`. After setting the table data and options, you can use `DataTableBuilder.build`(https://developers.google.com/apps-script/reference/charts/data-table-builder#build) to get the table. 
+First, you create a data source for the pie chart. [`Charts.newDataTable`](https://developers.google.com/apps-script/reference/charts/charts#newdatatable) creates an empty [DataTableBuilder](https://developers.google.com/apps-script/reference/charts/data-table-builder). Using [`addColumn`](https://developers.google.com/apps-script/reference/charts/data-table-builder#addcolumntype,-label) you can add a column [of a type](https://developers.google.com/apps-script/reference/charts/column-type) and give it a label. Then, using [`addRow`](https://developers.google.com/apps-script/reference/charts/data-table-builder#addrowvalues) you can add rows to the data table. As we have added two columns in the data table, the rows are also two columns. You can chain multiple operations in a single statement like I have done with `.addColumn`. After setting the table data and options, you can use [`DataTableBuilder.build`](https://developers.google.com/apps-script/reference/charts/data-table-builder#build) to get the table. 
 
-Now, you create a new chart, a pie chart in this case. [`Charts.newPieChart`](https://developers.google.com/apps-script/reference/charts/charts#newpiechart) creates a new chart of type "pie chart". You can add the data source using `setDataTable`(https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setdatatabletable). [`setDimensions`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setdimensionswidth,-height), [`set3D`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#set3d), [`setOption`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setoptionoption,-value) can be used for controlling the look of the chart. You can get the [list of all available options here](https://developers.google.com/chart/interactive/docs/gallery/piechart). After setting the data and options of the chart, you can use [`build`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#build) to build the chart. It will create a [Chart object](https://developers.google.com/apps-script/reference/charts/chart).
+Now, you create a new chart, a pie chart in this case. [`Charts.newPieChart`](https://developers.google.com/apps-script/reference/charts/charts#newpiechart) creates a new chart of type "pie chart". You can add the data source using [`setDataTable`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setdatatabletable). [`setDimensions`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setdimensionswidth,-height), [`set3D`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#set3d), [`setOption`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#setoptionoption,-value) can be used for controlling the look of the chart. You can get the [list of all available options here](https://developers.google.com/chart/interactive/docs/gallery/piechart). After setting the data and options of the chart, you can use [`build`](https://developers.google.com/apps-script/reference/charts/pie-chart-builder#build) to build the chart. It will create a [Chart object](https://developers.google.com/apps-script/reference/charts/chart).
 
 
 ## Generating PDF report
@@ -871,7 +871,7 @@ The function `_installMonthlyReportTrigger`, creates a new trigger using [`Scrip
 ![Installing trigger programmatically](./.notes/programatically-install-trigger.png)
 
 ## Using Lock Service
-[Lock or mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)) are [Synchronization (https://en.wikipedia.org/wiki/Synchronization_(computer_science)) primitives in computer science used to restrict access to a particular object to only one process or task even when multiple processes are trying to access it.
+[Lock or mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)) are [Synchronization primitives](https://en.wikipedia.org/wiki/Synchronization_(computer_science)) in computer science used to restrict access to a particular object to only one process or task even when multiple processes are trying to access it.
 
 Let's consider a scenario in our "CoolTodoApp". `_getRootFolder` is a function that creates the app's root folder if it doesn't exist and returns the id. Let's say we have two endpoints `GetPendingTask` and `GetCompletedTask` that return the pending and completed tasks resp. We know that both of these functions will be calling the `createRootFolder` at some point.
 ```js
