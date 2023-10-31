@@ -1,4 +1,14 @@
 <script>
+
+    let completed_tasks = [];
+    let pending_tasks = [];
+    const TASK_ID_IDX = 0;
+    const TASK_DESC_IDX = 1;
+    const TASK_COMPLETED_IDX = 2;
+  
+    /*
+    Logic to create collapsable effect
+    */
     const toggleTextTruncate = (evt) => {
       let ele = evt.currentTarget;
       let spans = ele.querySelectorAll('span');
@@ -19,13 +29,246 @@
         ele.classList.remove("text-truncate");
       }
     }
-    const initEventListeners = () => {
-      let taskNodes = document.getElementsByClassName('task-item');
-      for(let element of taskNodes){
-        console.log(element);
-        element.addEventListener('click', toggleTextTruncate);
+  
+    /*
+    Returns today's date in user's timezone
+    */
+    const getDate = () => {
+      var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+      let today = (new Date(Date.now() - tzoffset)).toISOString().substring(0,10);
+      return today;
+    }
+  
+    /*
+    Add Tasks to DOM
+    */
+    const renderTasks = (completed) => {
+        //This is the dom structure
+        /*
+          <div class="row fs-5 task" id="task1"> <-- node1
+            <div class="row my-auto p-0 m-0 col">  <-- node2
+              <div class="col-auto h-100 my-auto">  <-- node3
+                <input type="checkbox" class="test" checked/>  <-- node4
+              </div> 
+              <div class="col row text-truncate task-item">  <-- node5
+                  <span class="col me-1 text-truncate" >Task Description</span>  <-- node6
+                  <span class="col-auto my-auto">  <-- node7
+                    <i class="bi bi-chevron-down"></i>  <-- node8
+                  </span>
+              </div>
+            </div>
+          </div>
+        */
+      
+      let nodes = [];
+      let tasks = completed?completed_tasks:pending_tasks;
+      for(let task of tasks)
+      {
+        let node1 = document.createElement("div");
+        node1.classList.add("row");
+        node1.classList.add("fs-5");
+        node1.classList.add("task");
+  
+        let node2 = document.createElement("div");
+        node2.classList.add("row");
+        node2.classList.add("my-auto");
+        node2.classList.add("p-0");
+        node2.classList.add("m-0");
+        node2.classList.add("col");
+  
+        let node3 = document.createElement("div");
+        node3.classList.add("col-auto");
+        node3.classList.add("h-100");
+        node3.classList.add("my-auto");
+  
+        let node4 = document.createElement("input");
+        node4.setAttribute("type", "checkbox");
+        node4.checked = task[TASK_COMPLETED_IDX];
+        node4.setAttribute("id", task[TASK_ID_IDX]);
+        if(completed === false)
+        {
+          node4.addEventListener('input', () => {
+            handleTaskComplete(task[TASK_ID_IDX]);
+          })
+        }
+        else
+        {
+          node4.addEventListener('input', () => {
+            handleTaskPending(task[TASK_ID_IDX]);
+          })
+        }
+  
+        let node5 = document.createElement("div");
+        node5.classList.add("col");
+        node5.classList.add("row");
+        node5.classList.add("text-truncate");
+        node5.classList.add("task-item");
+        node5.addEventListener('click', toggleTextTruncate);
+  
+        let node6 = document.createElement("span");
+        node6.classList.add("col");
+        node6.classList.add("me-1");
+        node6.classList.add("text-truncate");
+        node6.textContent = task[TASK_DESC_IDX];
+  
+        let node7 = document.createElement("span");
+        node7.classList.add("col-auto");
+        node7.classList.add("my-auto");
+  
+        let node8 = document.createElement("i");
+        node8.classList.add("bi");
+        node8.classList.add("bi-chevron-down");
+  
+        node7.appendChild(node8);
+        node5.appendChild(node6);
+        node5.appendChild(node7);
+  
+        node3.appendChild(node4);
+  
+        node2.appendChild(node3);
+        node2.appendChild(node5);
+  
+        node1.appendChild(node2);
+  
+        nodes.push(node1);
+      }
+  
+      let node_id = completed?"completed-tasks-section":"pending-tasks-section";
+      let parentNode = document.getElementById(node_id);
+      while(parentNode.hasChildNodes())
+      {
+        parentNode.removeChild(parentNode.firstChild);
+      }
+      for(let node of nodes)
+      {
+        parentNode.appendChild(node);
       }
     }
   
-    window.onload = initEventListeners;
-  </script>
+    /*
+    Gets te completed tasks from the server
+    */
+    const getCompletedtask = () => {
+      let today = getDate();
+      google.script.run.withSuccessHandler((tasks) => {
+        for(let task of tasks)
+        {
+          if(completed_tasks.findIndex(row => row[TASK_ID_IDX] === task[TASK_ID_IDX]) === -1)
+          {
+            completed_tasks.push(task);
+          }
+        }
+        renderTasks(true);
+      }).withFailureHandler(err => {
+        console.log("error while getting completed tasks : ",err.message);
+      }).GetCompletedTasks(today);
+    }
+  
+    /*
+    Gets the pending tasks from the server
+    */
+    const getPendingTasks = () => {
+      let today = getDate();
+      google.script.run.withSuccessHandler((tasks) => {
+        for(let task of tasks)
+        {
+          if(pending_tasks.findIndex(row => row[TASK_ID_IDX] === task[TASK_ID_IDX]) === -1)
+          {
+            pending_tasks.push(task);
+          }
+        }
+        renderTasks(false);
+      }).withFailureHandler(err => {
+        console.log("error while getting pending tasks : ",err.message);
+      }).GetPendingTasks(today);
+    }
+  
+    /*
+    Handler when a new task is added
+    */
+    const handleTaskAdd = (e) => {
+      e.preventDefault();
+      const today = getDate();
+      const task_desc = document.getElementById('task-add-form').querySelector('textarea').value;
+      document.getElementById("add-task-submit").disabled = true;
+      google.script.run.withSuccessHandler((newRow) => {
+        if(pending_tasks.findIndex(row => row[TASK_ID_IDX] === newRow[TASK_ID_IDX]) === -1)
+        {
+          pending_tasks.push(newRow);
+        }
+        renderTasks(false);
+        document.getElementById('task-add-form').querySelector('textarea').value = "";
+        document.getElementById("add-task-submit").disabled = false;
+      }).withFailureHandler(err => {
+        console.log("error while adding new tasks : ",err.message);
+      }).AddTask(today, task_desc);
+    }
+  
+    /*
+    Handler when a pending task is checked as complete
+    */
+    const handleTaskComplete = (task_uuid) => {
+      const today = getDate();
+      document.getElementById("pending-tasks-section").classList.add("opacity-25");
+      document.getElementById("completed-tasks-section").classList.add("opacity-25");
+      google.script.run.withSuccessHandler((return_id) => {
+        let pending_task_idx = pending_tasks.findIndex(row => row[TASK_ID_IDX] === return_id);
+        if(pending_task_idx !== -1)
+        {
+          let newRow = [...pending_tasks[pending_task_idx]];
+          pending_tasks.splice(pending_task_idx, 1);
+          newRow[TASK_COMPLETED_IDX] = true;
+          if(completed_tasks.findIndex(row => row[TASK_ID_IDX] === newRow[TASK_ID_IDX]) === -1)
+          {
+            completed_tasks.push(newRow);
+          }
+        }
+        renderTasks(false);
+        renderTasks(true);
+        document.getElementById("pending-tasks-section").classList.remove("opacity-25");
+        document.getElementById("completed-tasks-section").classList.remove("opacity-25");
+      }).withFailureHandler((err) => {
+        console.log("error while adding new tasks : ",err.message);
+      }).UpdateTaskCompleted(today, task_uuid);
+    }
+  
+    /*
+    Handler when a completed task is unchecked as pending
+    */
+    const handleTaskPending = (task_uuid) => {
+      const today = getDate();
+      document.getElementById("pending-tasks-section").classList.add("opacity-25");
+      document.getElementById("completed-tasks-section").classList.add("opacity-25");
+      google.script.run.withSuccessHandler((return_id) => {
+        let completed_task_idx = completed_tasks.findIndex(row => row[TASK_ID_IDX] === return_id);
+        if(completed_task_idx !== -1)
+        {
+          let newRow = [...completed_tasks[completed_task_idx]];
+          completed_tasks.splice(completed_task_idx, 1);
+          newRow[TASK_COMPLETED_IDX] = false;
+          if(pending_tasks.findIndex(row => row[TASK_ID_IDX] === newRow[TASK_ID_IDX]) === -1)
+          {
+            pending_tasks.push(newRow);
+          }
+        }
+        renderTasks(false);
+        renderTasks(true);
+        document.getElementById("pending-tasks-section").classList.remove("opacity-25");
+        document.getElementById("completed-tasks-section").classList.remove("opacity-25");
+      }).withFailureHandler((err) => {
+        console.log("error while adding new tasks : ",err.message);
+      }).UpdateTaskPending(today, task_uuid);
+    }
+  
+    const initEventListeners = () => {
+      document.getElementById("task-add-form").addEventListener('submit', handleTaskAdd);
+    }
+  
+    const initJs = () => {
+      initEventListeners();
+      getCompletedtask();
+      getPendingTasks();
+    }
+    
+    window.onload = initJs;
+    </script>

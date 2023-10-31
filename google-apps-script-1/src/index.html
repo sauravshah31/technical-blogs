@@ -9,10 +9,12 @@
   <body>
     <div id="root">
       <?!= include('header'); ?>
-      <?!= include('pending-tasks'); ?>
-      <div class="divider container-md">
+      <div style="min-height:100vh;">
+        <?!= include('pending-tasks'); ?>
+        <div class="divider container-md">
+        </div>
+        <?!= include('completed-tasks'); ?>
       </div>
-      <?!= include('completed-tasks'); ?>
       <div class="container-fluid" id="footer">
         <div class="container-md py-4 fs-6">
           Cool todo app by <a href="https://github.com/sauravshah31" class="link-opacity-75 link-primary link-underline link-underline-opacity-0" target="_self">Saurav Shah</a>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 16pt;
+                box-sizing: border-box;
+            }
+
+            @page {
+                size: A4;
+            }
+
+            @media print {
+                body {
+                    color-adjust: exact !important;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                    background-color: #fff;
+                    border-radius: 0px;
+                    font-family: The 'Times New Roman', Times, serif;
+                }
+
+                .pdf-page {
+                    padding: 0px !important;
+                    width: 595pt !important;
+                    height: 842pt !important;
+                }
+                article {
+                    column-width: 17em !important;
+                    column-gap: 3em !important;
+                }
+                .pdf-title {
+                    margin-bottom: 12pt !important;
+                }
+
+                .space-print { 
+                  height : 10pt;
+                }
+
+                .space {
+                  display: none !important;
+                }
+            }
+
+            .space {
+              height : 10pt;
+            }
+            .pdf-page {
+                padding: 30pt;
+                page-break-after: always;
+            }
+            .pdf-title {
+                font-family: sans-serif;
+                font-size: 18pt;
+                letter-spacing: 1pt;
+                font-weight: bold;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            .section {
+                margin-top: 12pt;
+            }
+            .section-title {
+                font-weight: bold;
+                letter-spacing: .5pt;
+                font-size: 20pt;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td, th {
+                padding: 8px;
+            }
+            tr:nth-child(even){background-color: #f1f1f1;}
+
+            th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+                font-size: 14pt;
+            }
+
+            td {
+                font-size: 12pt;
+            }
+            pre {
+              display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="pdf-page">
+            <div class="pdf-title">
+                Tasks report for <?= data.start_date ?> to <?= data.end_date ?>
+            </div>
+            <div class="space"></div>
+            <div class="space-print"></div>
+            <div class="section">
+                <div class="section-title">Task Summary</div>
+                <img src="<?!= data.todo_chart ?>"/>
+                <div class="space-print"></div>
+                <div><b><pre>Total Task                           :</pre></b> <?= data.total_task ?> </div>
+                <div><b><pre>Total Completed                      :</pre></b> <?= data.total_completed ?> </div>
+                <div><b><pre>Total Pending                        :</pre></b>  <?= data.total_pending ?> </div>
+                <div><b><pre>Day with most no of tasks            :</pre></b> <?= data.max_tasks_date ?> (<?= data.max_tasks_number ?> tasks) </div>
+                <div><b><pre>Day with most no of completed tasks  :</pre></b> <?= data.max_completed_tasks_date ?> (<?= data.max_completed_tasks_number ?> tasks) </div>
+                <div><b><pre>Day with most no of pending tasks    :</pre></b> <?= data.max_pending_tasks_date ?> (<?= data.max_pending_tasks_number ?> tasks) </div>
+                <div><b><pre>Day with least no of tasks           :</pre></b> <?= data.min_tasks_date ?> (<?= data.min_tasks_number ?> tasks) </div>
+                <div><b><pre>Day with least no of completed tasks :</pre></b> <?= data.min_completed_tasks_date ?> (<?= data.min_completed_tasks_number ?> tasks) </div>
+                <div><b><pre>Day with least no of pending tasks   :</pre></b> <?= data.min_pending_tasks_date ?> (<?= data.min_pending_tasks_number ?> tasks) </div>
+                <div><b><pre>Average task completion rate per day :</pre></b> <?= data.average_task_completion_rate ?> </div>
+            </div>
+        </div>
+
+        <div class="pdf-page">
+            <div class="transaction">
+                <div class="pdf-title">
+                    Tasks details (<?= data.start_date ?> to <?= data.end_date ?>)
+                </div>
+                <div class="space"></div>
+                <div class="space-print"></div>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Total Completed</th>
+                        <th>Total Pending</th>
+                        <th>Total Tasks</th>
+                        <th>Details</th>
+                    </tr>
+                    <? for (var i = 0; i < data.tasks.length; i++) { ?>
+                        <tr>
+                            <? let j;
+                            for (j = 0; j < data.tasks[i].length - 1; j++) { ?>
+                                <td><?= data.tasks[i][j] ?></td>
+                            <? } ?>
+                            <td>
+                                <a href="<?= data.tasks[i][data.tasks[i].length - 1] ?>" target="_blank">link</a>
+                            </td>
+                        </tr>
+                    <? } ?>
+                </table>
+            </div>
+        </div>
+    </body>
+
+</html>
