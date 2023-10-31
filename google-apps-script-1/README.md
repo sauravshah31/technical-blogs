@@ -17,7 +17,7 @@
 * [Building client-side UI](#building-client-side-ui)
 * [Using Drive Service](#using-drive-service)
 * [Using Spreadsheet Service](#using-spreadsheet-service)
-* [Using Charts Service](#using-chart-service)
+* [Using Charts Service](#using-charts-service)
 * [Generating PDF report](#generating-pdf-report)
 * [Sending Email](#sending-email)
 * [Triggering events](#triggering-events)
