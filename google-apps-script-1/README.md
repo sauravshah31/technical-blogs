@@ -23,7 +23,7 @@
 * [Triggering events](#triggering-events)
 * [Using Lock Service](#using-lock-service)
 * [Meta tag and client side metadata](#meta-tag-and-client-side-metadata)
-* [Building server-side API](#nuilding-server-side-api)
+* [Building server-side API](#building-server-side-api)
 * [Deploying final CoolTodoApp](#deploying-final-cooltodoapp)
 
 ## Why to use Apps Script
