@@ -1053,13 +1053,10 @@ Open the deployed link and start sharing it with your friends. They can deploy a
 
 ---
 
-<blockquote>
-Wowza! 🚀 We've created a mind-blowing web app with the power of Google Apps Script! 🌟 Learning has never been this thrilling! 🤓📚 Time to dive into the awesomeness of your CoolTodoApp and stay on top of your tasks like a pro. 📅💪
+> Wowza! 🚀 We've created a mind-blowing web app with the power of Google Apps Script! 🌟 Learning has never been this thrilling! 🤓📚 Time to dive into the awesomeness of your CoolTodoApp and stay on top of your tasks like a pro. 📅💪
 
-Just think about how this journey began – understanding the mystical world of Apps Script, brainstorming the app features, diving into APIs, building small features and then layering on more cool stuff until we had our magnificent web app masterpiece. 🎨💼
+> Just think about how this journey began – understanding the mystical world of Apps Script, brainstorming the app features, diving into APIs, building small features and then layering on more cool stuff until we had our magnificent web app masterpiece. 🎨💼
 
-Now, you're not just a user; you're an explorer of endless possibilities! 🌠🌈 You can even unleash your creativity by [publishing your very own extensions](https://developers.google.com/apps-script/add-ons/how-tos/publish-add-on-overview) or more sensational Cool Apps. 🚀🎉
+> Now, you're not just a user; you're an explorer of endless possibilities! 🌠🌈 You can even unleash your creativity by [publishing your very own extensions](https://developers.google.com/apps-script/add-ons/how-tos/publish-add-on-overview) or more sensational Cool Apps. 🚀🎉
 
-And don't forget to share your spectacular creations with me on [Twitter](https://twitter.com/sauravshah31) – I can't wait to see what you've cooked up! 👀 [@sauravshah31](https://twitter.com/sauravshah31)
-
-</blockquote>
+> And don't forget to share your spectacular creations with me on [Twitter](https://twitter.com/sauravshah31) – I can't wait to see what you've cooked up! 👀 [@sauravshah31](https://twitter.com/sauravshah31)
