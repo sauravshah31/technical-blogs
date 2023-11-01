@@ -1042,7 +1042,7 @@ Our "CoolTodoApp" is complete for the most part. The only thing remaining is the
 
 [`report.gs`](./src/report.gs) contains the functions needed to generate and send the report. `_testReportTemplate` is the test function used to generate a dummy report from the template. `_getTasksSummary` returns rows of summarized tasks (date, #completed_tasks, #pending_tasks, #total_tasks, spreadsheet_link) for days between `start_date` and `end_date` (both inclusive).  `_generateTasksChart` generates the pie chart summarizing the tasks. `_getReportData` returns the data for the `report-template.html` template. `_sendMonthlyEmailReport` generates the report and sends it to the current user. `_installMonthlyReportTrigger` installs the monthly trigger to call `_sendMonthlyReportTriggerCallback` which calculates the  `start_date` and `end_date` for the previous month and calls the `_sendMonthlyEmailReport`.
 
-# Deploying final CoolTodoApp
+## Deploying final CoolTodoApp
 We are done with coding the "CoolTodoApp". We have been using "Test Deployment" till now. We need to create a new deployment. Click on "Deploy", then "New Deployment" and add a description for the app. Change "Execute as" to "User accessing the web app" so that when you share the app link with others, the app will run on that user's context, not yours. Change "Who has access" to "Anyone". Note how I am calling `_installMonthlyReportTrigger` in `doGet`. This way the trigger is installed in the other user's account as well, when you share the app link.
 
 ![Final Deployment](./.notes/final-deployment.png)
