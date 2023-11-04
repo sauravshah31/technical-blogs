@@ -1059,4 +1059,4 @@ Open the deployed link and start sharing it with your friends. They can deploy a
 
 > Now, you're not just a user; you're an explorer of endless possibilities! 🌠🌈 You can even unleash your creativity by [publishing your very own extensions](https://developers.google.com/apps-script/add-ons/how-tos/publish-add-on-overview) or more sensational Cool Apps. 🚀🎉
 
-> And don't forget to share your spectacular creations with me on [Twitter](https://twitter.com/sauravshah31) – I can't wait to see what you've cooked up! 👀 [@sauravshah31](https://twitter.com/sauravshah31)
+> And don't forget to share your spectacular creations with me on [X](https://X.com/sauravshah31) – I can't wait to see what you've cooked up! 👀 [@sauravshah31](https://X.com/sauravshah31)
